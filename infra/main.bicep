@@ -44,12 +44,12 @@ module dapr 'dapr/dapr.bicep' = {
   name: 'dapr'
   scope: rg
   params: {
-    clientId: ''
+    clientId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
     cosmosCollectionName: 'cdc-aspiredaprdemo'
     cosmosDatabaseName: 'cdb-aspiredaprdemo'
     cosmosUrl: c_aspiredaprdemo.outputs.connectionString
     keyVaultName: 'kv-aspiredaprdemo'
-    managedEnvironmentName: 'Development'
+    managedEnvironmentName: environmentName
     messagingNamespace: 'sb-aspiredaprdemo.servicebus.windows.net'
   }
 }

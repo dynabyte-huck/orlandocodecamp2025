@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "1268448574038093106"
+      "templateHash": "14019409871450639291"
     }
   },
   "parameters": {
@@ -384,7 +384,7 @@
         "mode": "Incremental",
         "parameters": {
           "clientId": {
-            "value": ""
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}', parameters('environmentName'))), 'Microsoft.Resources/deployments', 'resources'), '2022-09-01').outputs.MANAGED_IDENTITY_PRINCIPAL_ID.value]"
           },
           "cosmosCollectionName": {
             "value": "cdc-aspiredaprdemo"
@@ -399,7 +399,7 @@
             "value": "kv-aspiredaprdemo"
           },
           "managedEnvironmentName": {
-            "value": "Development"
+            "value": "[parameters('environmentName')]"
           },
           "messagingNamespace": {
             "value": "sb-aspiredaprdemo.servicebus.windows.net"
@@ -532,6 +532,7 @@
       },
       "dependsOn": [
         "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}', parameters('environmentName'))), 'Microsoft.Resources/deployments', 'c-aspiredaprdemo')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, format('rg-{0}', parameters('environmentName'))), 'Microsoft.Resources/deployments', 'resources')]",
         "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('rg-{0}', parameters('environmentName')))]"
       ]
     },

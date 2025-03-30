@@ -57,3 +57,4 @@ typings/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
+.azure
