@@ -1,0 +1,43 @@
+api-version: 2024-02-02-preview
+location: {{ .Env.AZURE_LOCATION }}
+identity:
+  type: UserAssigned
+  userAssignedIdentities:
+    ? "{{ .Env.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID }}"
+    : {}
+properties:
+  environmentId: {{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_ID }}
+  configuration:
+    activeRevisionsMode: single
+    runtime:
+      dotnet:
+        autoConfigureDataProtection: true
+    registries:
+      - server: {{ .Env.AZURE_CONTAINER_REGISTRY_ENDPOINT }}
+        identity: {{ .Env.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID }}
+  template:
+    containers:
+      - image: {{ .Image }}
+        name: aspiredaprdemo-frontend
+        env:
+          - name: AZURE_CLIENT_ID
+            value: {{ .Env.MANAGED_IDENTITY_CLIENT_ID }}
+          - name: NODE_ENV
+            value: development
+          - name: VITE_SUBSCRIBER_URL
+            value: https://aspiredaprdemo-subscriberservice:8005
+          - name: VITE_WEATHER_URL
+            value: https://aspiredaprdemo-weatherservice:8007
+          - name: services__aspiredaprdemo-subscriberservice__http__0
+            value: http://aspiredaprdemo-subscriberservice.internal.{{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN }}
+          - name: services__aspiredaprdemo-subscriberservice__https__0
+            value: https://aspiredaprdemo-subscriberservice:8005
+          - name: services__aspiredaprdemo-weatherservice__http__0
+            value: http://aspiredaprdemo-weatherservice.internal.{{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN }}
+          - name: services__aspiredaprdemo-weatherservice__https__0
+            value: https://aspiredaprdemo-weatherservice:8007
+    scale:
+      minReplicas: 1
+tags:
+  azd-service-name: aspiredaprdemo-frontend
+  aspire-resource-name: aspiredaprdemo-frontend

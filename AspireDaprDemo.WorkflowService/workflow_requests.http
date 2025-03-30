@@ -1,0 +1,3 @@
+### Trigger Cron Job Endpoint
+POST https://localhost:7011/cronjob_send
+Content-Type: application/json

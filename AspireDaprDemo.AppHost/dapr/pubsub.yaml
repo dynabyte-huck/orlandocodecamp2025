@@ -1,0 +1,17 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: demopubsub
+auth:
+  secretStore: demosecretstore
+spec:
+  type: pubsub.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: 0.0.0.0:6379
+  - name: redisPassword
+    value:
+    secretKeyRef: 
+        name: redis-key
+        key:  redis-key

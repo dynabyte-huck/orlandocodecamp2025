@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Current Weather Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .date {
+            font-size: 18px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .temperature {
+            font-size: 32px;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+
+        .summary {
+            font-size: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Curent Weather Update</div>
+        <div class="date">{Date}</div>
+        <div class="temperature">Temperature: {TemperatureF}°F</div>
+        <div class="summary">{Summary}</div>
+    </div>
+</body>
+</html>
