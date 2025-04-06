@@ -217,12 +217,6 @@ app.MapPost("/notifyemail", async ([FromServices] DaprClient daprClient, [FromSe
         subType = "html";
     }
 
-    var metadata = new Dictionary<string, string>
-    {
-        { "emailTo", notification.ToAddress },
-        { "subject", notification.Subject },
-    };
-
     Dictionary<string, string> smtpHostSecret = await daprClient.GetSecretAsync(GlobalConstants.SecretStoreName, "smtp-host");
     Dictionary<string, string> smtpPortSecret = await daprClient.GetSecretAsync(GlobalConstants.SecretStoreName, "smtp-port");
     Dictionary<string, string> smtpApiKeySecret = await daprClient.GetSecretAsync(GlobalConstants.SecretStoreName, "smtp-apiKey");
@@ -238,7 +232,7 @@ app.MapPost("/notifyemail", async ([FromServices] DaprClient daprClient, [FromSe
 
     using var smtp = new SmtpClient();
     await smtp.ConnectAsync(smtpHost, smtpPort, SecureSocketOptions.StartTlsWhenAvailable);
-    if(!string.IsNullOrWhiteSpace(smtpApiKey))
+    if (!string.IsNullOrWhiteSpace(smtpApiKey))
     {
         await smtp.AuthenticateAsync("apikey", smtpApiKey);
     }

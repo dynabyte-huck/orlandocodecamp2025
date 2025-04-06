@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost($"cronjob_send", async ([FromServices] DaprClient daprClient) =>
+app.MapPost($"democronjob", async ([FromServices] DaprClient daprClient) =>
 {
     const int PAGE_SIZE = 50;
     PagedCollection<Subscriber>? subscribers = null;

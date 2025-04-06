@@ -1,11 +1,4 @@
-﻿using Aspire.Hosting.Azure.CosmosDB;
-using Aspire.Hosting.Azure.ServiceBus;
-
-using CommunityToolkit.Aspire.Hosting.Dapr;
-
-using Microsoft.Extensions.Hosting;
-
-using StackExchange.Redis;
+﻿using CommunityToolkit.Aspire.Hosting.Dapr;
 
 // set up some constants
 const string APP_ID = "APP_ID";
