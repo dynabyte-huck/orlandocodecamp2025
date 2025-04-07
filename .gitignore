@@ -5,6 +5,9 @@
 *.sln.docstates
 *.userprefs
 
+# Certificate and key files
+*.[Pp]em
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
